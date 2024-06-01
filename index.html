@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مولد توليفات الأرقام</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #f3f3f3;
+    }
+    #container {
+        max-width: 500px;
+        width: 100%;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    label {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+    #possibilities {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    #instagram-link {
+        margin-top: 20px;
+    }
+    #instagram-link a {
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.3s, transform 0.3s;
+    }
+    #instagram-link a:hover {
+        color: #d6249f;
+        transform: scale(1.1);
+    }
+    #instagram-link i {
+        margin-right: 8px;
+    }
+</style>
+</head>
+<body>
+    <div id="container">
+        <h2>مولد توليفات الأرقام</h2>
+        <label for="numbers">أدخل الأرقام:</label>
+        <input type="text" id="numbers" maxlength="16" placeholder="أدخل الأرقام هنا">
+        <button onclick="generateNumbers()">توليد الأرقام</button>
+        <textarea id="result" readonly></textarea>
+        <div id="possibilities"></div>
+    </div>
+
+    <div id="instagram-link">
+        <a href="https://www.instagram.com/dh4xel/" target="_blank"><i class="fab fa-instagram"></i> حسابي على إنستغرام</a>
+    </div>
+
+    <script>
+        function generateNumbers() {
+            var numbers = document.getElementById("numbers").value;
+            var result = generate(numbers.split(""), []);
+            document.getElementById("result").value = result.join("\n");
+            document.getElementById("possibilities").innerText = "عدد الاحتمالات: " + result.length;
+        }
+
+        function generate(nums, result, current = "") {
+            if (current.length === nums.length) {
+                result.push(current);
+                return;
+            }
+            for (var i = 0; i < nums.length; i++) {
+                generate(nums, result, current + nums[i]);
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>
